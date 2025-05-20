@@ -8,7 +8,7 @@ export default function ProgressBar() {
   const pathname = usePathname();
 
   const match = pathname.match(/\/step(\d+)/);
-  const currentStep = match ? parseInt(match[1], 10) : 0;
+  const currentStep = match && !isNaN(Number(match[1])) ? parseInt(match[1], 10) : 0;
 
   const progressPercent = Math.min(
     Math.round((currentStep / TOTAL_STEPS) * 100),
@@ -22,7 +22,7 @@ export default function ProgressBar() {
       </p>
       <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
         <div
-          className="h-full bg-blue-500 rounded-full transition-all duration-500"
+          className="h-full bg-blue-600 rounded-full transition-all duration-500"
           style={{ width: `${progressPercent}%` }}
         />
       </div>
